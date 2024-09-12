@@ -73,18 +73,19 @@ class Grafo:
             vizinhos_texto = ', '.join(vizinhos) if vizinhos else 'Nenhum vizinho'
             print(f"{no} -> {vizinhos_texto}")
 
+
 # Fluxo de atendimento (com ciclos)
 fluxo_atendimento_com_ciclo = {
     'Recepção': ['Triagem'],
     'Triagem': ['Consulta'],
     'Consulta': ['Exame', 'Tratamento'],
     'Exame': ['Resultado'],
-    'Resultado': ['Consulta'],  # Ciclo: o fluxo retorna para 'Consulta'
+    'Resultado': ['Consulta'],  # ciclo
     'Tratamento': []
 }
 
 
-# Fluxo de atendimento (sem ciclos)
+# Fluxo de atendimento (sem ciclo)
 fluxo_atendimento = {
     'Recepção': ['Triagem'],
     'Triagem': ['Consulta'],
@@ -94,7 +95,8 @@ fluxo_atendimento = {
     'Tratamento': []
 }
 
-# Árvore de decisão de anamnese (sem ciclos)
+
+# Árvore de decisão de anamnese (sem ciclo)
 arvore_anamnese = {
     'Sintoma A': ['Exame 1', 'Exame 2'],
     'Exame 1': ['Diagnóstico 1'],
@@ -103,7 +105,8 @@ arvore_anamnese = {
     'Diagnóstico 2': []
 }
 
-# Árvore de decisão de anamnese com ciclo (para testar o ciclo)
+
+# Árvore de decisão de anamnese (com ciclo)
 arvore_anamnese_com_ciclo = {
     'Sintoma A': ['Exame 1', 'Exame 2'],
     'Exame 1': ['Diagnóstico 1'],
@@ -112,11 +115,13 @@ arvore_anamnese_com_ciclo = {
     'Diagnóstico 2': []
 }
 
+
 # Criação dos grafos para cada estrutura
 grafo_fluxo = Grafo()
 grafo_fluxo_com_ciclo = Grafo()
 grafo_anamnese = Grafo()
 grafo_anamnese_com_ciclo = Grafo()
+
 
 # Verificação do fluxo de atendimento (sem ciclo)
 print("Verificação para o Fluxo de Atendimento (sem ciclo):")
@@ -124,17 +129,20 @@ grafo_fluxo.carregar_estrutura(fluxo_atendimento)
 grafo_fluxo.dfs_verifica_ciclo() 
 grafo_fluxo.imprimir_estrutura() 
 
+
 # Verificação do fluxo de atendimento (com ciclo)
 print("Verificação para o Fluxo de Atendimento (com ciclo):")
 grafo_fluxo_com_ciclo.carregar_estrutura(fluxo_atendimento_com_ciclo) 
 grafo_fluxo_com_ciclo.dfs_verifica_ciclo() 
 grafo_fluxo_com_ciclo.imprimir_estrutura()
 
+
 # Verificação da árvore de anamnese (sem ciclo)
 print("\nVerificação para a Árvore de Anamnese (sem ciclo):")
 grafo_anamnese.carregar_estrutura(arvore_anamnese) 
 grafo_anamnese.dfs_verifica_ciclo() 
 grafo_anamnese.imprimir_estrutura()  
+
 
 # Verificação da árvore de anamnese (com ciclo)
 print("\nVerificação para a Árvore de Anamnese (com ciclo):")
