@@ -66,12 +66,14 @@ class Grafo:
 
 
     def imprimir_estrutura(self):
-        print("\nEstrutura do Grafo:")
-        # Para cada nó no grafo, imprimimos seus vizinhos
-        for no, vizinhos in self.grafo.items():
+        print("\n")
+        print("Estrutura do Grafo:")
+        # Para cada nó (node) no grafo, imprimimos seus vizinhos
+        for node, vizinhos in self.grafo.items():
             # Se o nó não tiver vizinhos, imprimimos "Nenhum vizinho"
             vizinhos_texto = ', '.join(vizinhos) if vizinhos else 'Nenhum vizinho'
-            print(f"{no} -> {vizinhos_texto}")
+            print(f"  {node} -> {vizinhos_texto}")
+        print("\n\n")
 
 
 # Fluxo de atendimento (com ciclos)
@@ -87,22 +89,39 @@ fluxo_atendimento_com_ciclo = {
 
 # Fluxo de atendimento (sem ciclo)
 fluxo_atendimento = {
-    'Recepção': ['Triagem'],
+    'Entrada': ['Triagem'],
     'Triagem': ['Consulta'],
     'Consulta': ['Exame', 'Tratamento'],
     'Exame': ['Resultado'],
     'Resultado': ['Tratamento'],
-    'Tratamento': []
+    'Tratamento': ['Alta'],
+    'Alta': []
+}
+
+# Fluxo de atendimento (com ciclos)
+fluxo_atendimento_com_ciclos = {
+    'Entrada': ['Triagem'],
+    'Triagem': ['Consulta'],
+    'Consulta': ['Exame', 'Tratamento'],
+    'Exame': ['Resultado'],
+    'Resultado': ['Tratamento', 'Consulta'],  # ciclo com Consulta de retorno
+    'Tratamento': ['Alta'],
+    'Alta': []
 }
 
 
 # Árvore de decisão de anamnese (sem ciclo)
 arvore_anamnese = {
-    'Sintoma A': ['Exame 1', 'Exame 2'],
-    'Exame 1': ['Diagnóstico 1'],
-    'Exame 2': ['Diagnóstico 2'],
-    'Diagnóstico 1': [],
-    'Diagnóstico 2': []
+    'Febre': ['Dor de garganta', 'Dor no peito'],
+    'Dor de garganta': ['Tratamento A', 'Tosse'],
+    'Tosse': ['Tratamento B', 'Tratamento C'],
+    'Dor no peito': ['Tratamento D', 'Tratamento E'],
+    'Tratamento A': ["Alta"],
+    'Tratamento B': ["Alta"],
+    'Tratamento C': ["Alta"],
+    'Tratamento D': ["Alta"],
+    'Tratamento E': ["Alta"],
+    'Alta': []
 }
 
 
@@ -117,35 +136,25 @@ arvore_anamnese_com_ciclo = {
 
 
 # Criação dos grafos para cada estrutura
-grafo_fluxo = Grafo()
-grafo_fluxo_com_ciclo = Grafo()
-grafo_anamnese = Grafo()
-grafo_anamnese_com_ciclo = Grafo()
+def runGraph(flow_name, graph_data):
+    print("--------------------------------------------------\n")
+    print(f"Verificação para {flow_name}:")
+    print("\n")
+
+    grafo = Grafo()
+    grafo.carregar_estrutura(graph_data)
+    grafo.dfs_verifica_ciclo()
+    grafo.imprimir_estrutura()
 
 
 # Verificação do fluxo de atendimento (sem ciclo)
-print("Verificação para o Fluxo de Atendimento (sem ciclo):")
-grafo_fluxo.carregar_estrutura(fluxo_atendimento) 
-grafo_fluxo.dfs_verifica_ciclo() 
-grafo_fluxo.imprimir_estrutura() 
-
+runGraph("o Fluxo de Atendimento", fluxo_atendimento)
 
 # Verificação do fluxo de atendimento (com ciclo)
-print("Verificação para o Fluxo de Atendimento (com ciclo):")
-grafo_fluxo_com_ciclo.carregar_estrutura(fluxo_atendimento_com_ciclo) 
-grafo_fluxo_com_ciclo.dfs_verifica_ciclo() 
-grafo_fluxo_com_ciclo.imprimir_estrutura()
-
+runGraph("o Fluxo de Atendimento com ciclo", fluxo_atendimento_com_ciclos)
 
 # Verificação da árvore de anamnese (sem ciclo)
-print("\nVerificação para a Árvore de Anamnese (sem ciclo):")
-grafo_anamnese.carregar_estrutura(arvore_anamnese) 
-grafo_anamnese.dfs_verifica_ciclo() 
-grafo_anamnese.imprimir_estrutura()  
-
+runGraph("a Árvore de Anamnese (sem ciclo)", arvore_anamnese)
 
 # Verificação da árvore de anamnese (com ciclo)
-print("\nVerificação para a Árvore de Anamnese (com ciclo):")
-grafo_anamnese_com_ciclo.carregar_estrutura(arvore_anamnese_com_ciclo)  
-grafo_anamnese_com_ciclo.dfs_verifica_ciclo()  
-grafo_anamnese_com_ciclo.imprimir_estrutura()  
+runGraph("a Árvore de Anamnese (com ciclo)", arvore_anamnese_com_ciclo)
