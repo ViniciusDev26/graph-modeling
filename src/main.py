@@ -3,14 +3,14 @@ from flows import *
 
 # Criação dos grafos para cada estrutura
 def runGraph(flow_name, graph_data):
-    print("--------------------------------------------------\n")
-    print(f"Verificação para {flow_name}:")
-    print("\n")
+  print("--------------------------------------------------\n")
+  print(f"Verificação para {flow_name}:")
+  print("\n")
 
-    grafo = Grafo()
-    grafo.carregar_estrutura(graph_data)
-    grafo.dfs_verifica_ciclo()
-    grafo.imprimir_estrutura()
+  grafo = Grafo()
+  grafo.carregar_estrutura(graph_data)
+  grafo.dfs_verifica_ciclo()
+  grafo.imprimir_estrutura()
 
 # Verificação do fluxo de atendimento
 runGraph("o Fluxo de Atendimento", fluxo_atendimento)
