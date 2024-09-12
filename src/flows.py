@@ -22,15 +22,11 @@ fluxo_atendimento_com_ciclos = {
 
 # Árvore de decisão de anamnese (sem ciclos)
 arvore_anamnese = {
-  'Febre': ['Dor de garganta', 'Dor no peito'],
-  'Dor de garganta': ['Tratamento A', 'Tosse'],
-  'Tosse': ['Tratamento B', 'Tratamento C'],
-  'Dor no peito': ['Tratamento D', 'Tratamento E'],
-  'Tratamento A': [],
-  'Tratamento B': [],
-  'Tratamento C': [],
-  'Tratamento D': [],
-  'Tratamento E': [],
+  'Sintoma A': ['Exame 1', 'Exame 2'],
+  'Exame 1': ['Diagnóstico 1'],
+  'Exame 2': ['Diagnóstico 2'],
+  'Diagnóstico 1': [],
+  'Diagnóstico 2': []
 }
 
 arvore_anamnese_com_ciclo = {
